@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.example.ufilesdk.MainActivity">
+
+    <TextView
+        android:layout_marginTop="@dimen/one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="请先填写MainActivity中用户信息"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/one"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="将对SD卡根目录的test.txt进行以下操作"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="putFile"
+                android:text="上传文件" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="uploadHit"
+                android:text="检查秒传" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getFile"
+                android:text="下载文件" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="headFile"
+                android:text="查询文件基本信息" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="deleteFile"
+                android:text="删除文件" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/one"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="将对SD卡根目录的app.apk进行以下操作"/>
+        <LinearLayout
+            android:layout_marginTop="@dimen/two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/initiateMultipartUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="initiateMultipartUpload"
+                android:text="初始化分片" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/uploadPart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="uploadPart"
+                android:enabled="false"
+                android:text="分片上传" />
+
+            <Button
+                android:id="@+id/uploadPartRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="uploadPartRetry"
+                android:enabled="false"
+                android:text="带有自动重试的分片上传" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/finishMultipartUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="finishMultipartUpload"
+                android:enabled="false"
+                android:text="完成分片" />
+
+            <Button
+                android:id="@+id/abortMultipartUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="abortMultipartUpload"
+                android:enabled="false"
+                android:text="放弃分片" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
