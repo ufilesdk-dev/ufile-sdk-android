@@ -57,7 +57,7 @@ public class HttpAsyncTask extends AsyncTask<Object, Object, Object> {
             authorization = authorization + ":" + putPolicy;
             Log.i(TAG, "authorization: " + authorization);
         }
-        
+
         HttpURLConnection conn = null;
         JSONObject response = new JSONObject();
         try {
@@ -121,7 +121,7 @@ public class HttpAsyncTask extends AsyncTask<Object, Object, Object> {
         reader.close();
         String as = answer.toString();
         if (!as.isEmpty()) {
-            if ("application/json".equals(response.getJSONObject("headers").getString("Content-Type"))) {
+            if ("application/json".equals(response.getJSONObject("headers").getString("content-type"))) {
                 JSONObject body = new JSONObject(as);
                 response.put("body", body);
             } else {
