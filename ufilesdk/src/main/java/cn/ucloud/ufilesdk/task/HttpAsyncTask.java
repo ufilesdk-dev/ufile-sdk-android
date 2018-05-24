@@ -51,7 +51,13 @@ public class HttpAsyncTask extends AsyncTask<Object, Object, Object> {
 
     @Override
     protected Object doInBackground(Object... params) {
-        String authorization = getAuthorization(uFileRequest);
+        //有签名服务器域名就用服务器签名，没有就用客户端内置签名
+        String authorization;
+        if (!TextUtils.isEmpty(uFileRequest.authServer) ) {
+            authorization = getAuthorization(uFileRequest);
+        } else {
+            authorization = getTokenAuthorization(uFileRequest);
+        }
         String putPolicy = getPutPolicy();
         if (!TextUtils.isEmpty(putPolicy)) {
             authorization = authorization + ":" + putPolicy;
@@ -130,6 +136,21 @@ public class HttpAsyncTask extends AsyncTask<Object, Object, Object> {
         } else {
             Log.e(TAG, "read null!!!");
         }
+    }
+
+    public String getTokenAuthorization(UFileRequest request) {
+        String httpMethod = request.getHttpMethod();
+        String contentMD5 = request.getContentMD5();
+        String contentType = request.getContentType();
+        String date = request.getDate();
+//        String canonicalUCloudHeaders = client.spliceCanonicalHeaders(request);
+        String canonicalResource = "/" + request.bucket + "/" + request.getKeyName();
+        String stringToSign =  httpMethod + "\n" + contentMD5 + "\n" + contentType + "\n" + date + "\n" + canonicalResource;
+
+        String signature = new HmacSHA1().sign(request.privateToken, stringToSign);
+        String authorization = "UCloud" + " " + request.publicToken + ":" + signature;
+
+        return authorization;
     }
 
     protected String getAuthorization(UFileRequest uFileRequest) {
