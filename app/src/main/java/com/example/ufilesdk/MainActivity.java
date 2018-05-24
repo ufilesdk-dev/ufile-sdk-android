@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
      * publicToken : 公钥（内置签名算法计算签名必填参数）
      * privateToken : 私钥（内置签名算法计算签名必填参数）
      */
-    private static final String bucket = "xxz001";
+    private static final String bucket = "";
     private static final String proxySuffix = ".ufile.ucloud.cn";//使用默认域名后缀 .ufile.ucloud.cn
-    private static final String authServer = "http://192.168.160.63:8008";
-    private static final String publicToken = "TOKEN_48b6c1e0-3a6c-42b5-9853-4d25cc22927b";
-    private static final String privateToken = "eda25855-dc0c-40a7-be17-adf7a6bc5d59";
+    private static final String authServer = "";
+    private static final String publicToken = "";
+    private static final String privateToken = "";
 
     private String testKey = "123.jpg";//sdcard 根目录放置文件123.jpg
 
