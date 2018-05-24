@@ -154,10 +154,7 @@ public class HttpAsyncTask extends AsyncTask<Object, Object, Object> {
     }
 
     protected String getAuthorization(UFileRequest uFileRequest) {
-        if (!UFileRequest.authServer.endsWith("/")) {
-            UFileRequest.authServer += "/";
-        }
-        String url = UFileRequest.authServer + "token_server.php"
+        String url = UFileRequest.authServer
                 + "?method=" + uFileRequest.getHttpMethod()
                 + "&bucket=" + UFileRequest.bucket
                 + "&key=" + uFileRequest.getKeyName()
