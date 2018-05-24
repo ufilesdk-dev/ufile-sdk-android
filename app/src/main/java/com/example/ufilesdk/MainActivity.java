@@ -30,15 +30,22 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     /**
-     * bucket : bucket name
-     * proxySuffix : 域名后缀
-     * authServer : 签名服务器url
+     * 先用内置签名算法计算签名，传入publicToken和privateToken测试demo的功能是否可用
+     * 再用服务器计算签名，部署好服务器，传入authServer测试签名服务器是否可用
+     *
+     * bucket : bucket name 必填参数
+     * proxySuffix : 域名后缀 默认域名后缀.ufile.ucloud.cn
+     * authServer : 签名服务器url（服务器计算签名必填参数）
+     * publicToken : 公钥（内置签名算法计算签名必填参数）
+     * privateToken : 私钥（内置签名算法计算签名必填参数）
      */
-    private static final String bucket = "";
-    private static final String proxySuffix = ".ufile.ucloud.cn";
-    private static final String authServer = "";
+    private static final String bucket = "xxz001";
+    private static final String proxySuffix = ".ufile.ucloud.cn";//使用默认域名后缀 .ufile.ucloud.cn
+    private static final String authServer = "http://192.168.160.63:8008";
+    private static final String publicToken = "TOKEN_48b6c1e0-3a6c-42b5-9853-4d25cc22927b";
+    private static final String privateToken = "eda25855-dc0c-40a7-be17-adf7a6bc5d59";
 
-    private String testKey = "test.mp4";
+    private String testKey = "123.jpg";//sdcard 根目录放置文件123.jpg
 
     //test file
     private File testFile = getTestFile();
@@ -55,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById();
         progressDialog = new ProgressDialog(this);
         //init ufile sdk
-        uFileSDK = new UFileSDK(bucket, proxySuffix, authServer);
-        //uFileSDK = new UFileSDK(bucket, authServer);//使用默认域名后缀 .ufile.ucloud.cn
+        //内置签名算法计算签名
+        uFileSDK = new UFileSDK(bucket, proxySuffix, publicToken, privateToken);
+        //服务器计算签名
+//        uFileSDK = new UFileSDK(bucket, proxySuffix, authServer);
     }
 
     public void putFile(View view) {

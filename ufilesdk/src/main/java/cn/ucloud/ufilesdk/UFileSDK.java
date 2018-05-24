@@ -33,17 +33,7 @@ public class UFileSDK {
     private String defaultUrl;
 
     /**
-     * sdk init
-     *
-     * @param bucket     bucket name
-     * @param authServer 签名服务器
-     */
-    public UFileSDK(String bucket, String authServer) {
-        this(bucket, DEFAULT_PROXY_SUFFFIX, authServer);
-    }
-
-    /**
-     * sdk init
+     * sdk init 服务器计算签名
      *
      * @param bucket      bucket name
      * @param proxySuffix 域名后缀
@@ -56,6 +46,24 @@ public class UFileSDK {
         this.defaultUrl = "http://" + bucket + proxySuffix;
         UFileRequest.bucket = bucket;
         UFileRequest.authServer = authServer;
+    }
+
+    /**
+     * sdk init 内置签名算法计算签名
+     *
+     * @param bucket      bucket name
+     * @param proxySuffix 域名后缀
+     * @param publicToken  内置签名计算公钥
+     * @param privateToken  内置签名计算私钥
+     */
+    public UFileSDK(String bucket, String proxySuffix, String publicToken, String privateToken) {
+        if (TextUtils.isEmpty(bucket) || TextUtils.isEmpty(proxySuffix) || TextUtils.isEmpty(publicToken) || TextUtils.isEmpty(privateToken)) {
+            throw new IllegalArgumentException("Bucket, proxySuffix, publicToken and privateToken should not be empty!");
+        }
+        this.defaultUrl = "http://" + bucket + proxySuffix;
+        UFileRequest.bucket = bucket;
+        UFileRequest.publicToken = publicToken;
+        UFileRequest.privateToken = privateToken;
     }
 
 //    public HttpAsyncTask getAuthorization(UFileRequest uFileRequest, String key_name, final Callback callback) {

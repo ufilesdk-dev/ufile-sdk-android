@@ -27,6 +27,12 @@ public class UFileRequest implements Serializable {
     // signature server
     public static String authServer;
 
+    // publicToken
+    public static String publicToken;
+
+    // privateToken
+    public static String privateToken;
+
     // http request method
     private String httpMethod;
 
