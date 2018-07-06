@@ -38,12 +38,14 @@ public class MainActivity extends AppCompatActivity {
      * authServer : 签名服务器url（服务器计算签名必填参数）
      * publicToken : 公钥（内置签名算法计算签名必填参数）
      * privateToken : 私钥（内置签名算法计算签名必填参数）
+     * prefix : 文件前缀
      */
     private static final String bucket = "";
     private static final String proxySuffix = ".ufile.ucloud.cn";//使用默认域名后缀 .ufile.ucloud.cn
     private static final String authServer = "";
     private static final String publicToken = "";
     private static final String privateToken = "";
+    private static final String prefix = "";
 
     private String testKey = "123.jpg";//sdcard 根目录放置文件123.jpg
 
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
         String content_type = "text/plain";
         String date = "";
         String key_name = testFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         final UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);
@@ -121,18 +126,24 @@ public class MainActivity extends AppCompatActivity {
     public void uploadHit(View view) {
         String http_method = "POST";
         String key_name = testFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);
         request.setKeyName(key_name);
 
-        final HttpAsyncTask httpAsyncTask = uFileSDK.uploadHit(request, testFile, getDefaultCallback());
+        final HttpAsyncTask httpAsyncTask = uFileSDK.uploadHit(request, testFile, key_name, getDefaultCallback());
         showProcessDialog(httpAsyncTask);
     }
 
     public void getFile(View view) {
         final String http_method = "GET";
         String key_name = testKey;
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);
@@ -177,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
     public void headFile(View view) {
         String http_method = "HEAD";
         String key_name = testKey;
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);
@@ -189,6 +203,9 @@ public class MainActivity extends AppCompatActivity {
     public void deleteFile(View view) {
         String http_method = "DELETE";
         String key_name = testKey;
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);
@@ -205,6 +222,9 @@ public class MainActivity extends AppCompatActivity {
     public void initiateMultipartUpload(View view) {
         String http_method = "POST";
         String key_name = partFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);
@@ -259,6 +279,9 @@ public class MainActivity extends AppCompatActivity {
         uploadPartRetry.setEnabled(false);
         final String http_method = "PUT";
         String key_name = partFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
         String content_type = "application/octet-stream";
 
         long blk_size = uFilePart.getBlkSize();
@@ -335,6 +358,9 @@ public class MainActivity extends AppCompatActivity {
         uploadPart.setEnabled(false);
         final String http_method = "PUT";
         String key_name = partFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
         String content_type = "application/octet-stream";
 
         long blk_size = uFilePart.getBlkSize();
@@ -409,6 +435,9 @@ public class MainActivity extends AppCompatActivity {
         }
         String http_method = "POST";
         String key_name = partFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
         String content_type = "text/plain";
         String etags = uFilePart.getEtags();
 
@@ -441,6 +470,9 @@ public class MainActivity extends AppCompatActivity {
         }
         String http_method = "DELETE";
         String key_name = partFile.getName();
+        if (prefix != "") {
+            key_name = prefix + "/" + key_name;
+        }
 
         UFileRequest request = new UFileRequest();
         request.setHttpMethod(http_method);

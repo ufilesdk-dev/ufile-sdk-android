@@ -119,8 +119,8 @@ public class UFileSDK {
      *                     void onFail(JSONObject message);  请参考 private void cb(JSONObject response, Callback callback)
      * @return http async task 用于取消掉当前任务
      */
-    public HttpAsyncTask uploadHit(UFileRequest uFileRequest, final File file, final Callback callback) {
-        String url = this.defaultUrl + "/uploadhit?Hash=" + UFileUtils.calcSha1(file) + "&FileName=" + UFileUtils.urlEncode(file.getName()) + "&FileSize=" + file.length();
+    public HttpAsyncTask uploadHit(UFileRequest uFileRequest, final File file, String key_name, final Callback callback) {
+        String url = this.defaultUrl + "/uploadhit?Hash=" + UFileUtils.calcSha1(file) + "&FileName=" + UFileUtils.urlEncode(key_name) + "&FileSize=" + file.length();
         HttpAsyncTask httpAsyncTask = getDefaultHttpAsyncTask(url, uFileRequest, callback);
         httpAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         return httpAsyncTask;
