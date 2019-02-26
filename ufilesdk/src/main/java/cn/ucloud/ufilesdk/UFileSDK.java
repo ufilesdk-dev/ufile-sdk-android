@@ -28,7 +28,7 @@ public class UFileSDK {
     public static final String VERSION_NAME = "1.0.1";
     public static final int VERSION_CODE = 10001;
 
-    private static final String DEFAULT_PROXY_SUFFFIX = ".ufile.ucloud.cn";
+    private static final String DEFAULT_PROXY_SUFFFIX = ".cn-bj.ufileos.com";   //按用户实际bucket所在地修改
 
     private String defaultUrl;
 
